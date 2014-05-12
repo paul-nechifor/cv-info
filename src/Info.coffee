@@ -1,6 +1,7 @@
 yaml = require 'js-yaml'
 fs = require 'fs'
 ProjectsInfo = require './ProjectsInfo'
+ContactInfo = require './ContactInfo'
 
 class module.exports
   constructor: ->
@@ -26,3 +27,4 @@ class module.exports
 
   constructInfos: ->
     @infos.projects = new ProjectsInfo this, @json
+    @infos.contact = new ContactInfo this, @json
