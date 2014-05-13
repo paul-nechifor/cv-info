@@ -6,7 +6,6 @@ ContactInfo = require './ContactInfo'
 class module.exports
   constructor: ->
     @json = null
-    @infos = {}
 
   loadFromFile: (path, cb) ->
     fs.readFile path, 'utf8', (err, yamlData) =>
@@ -26,5 +25,5 @@ class module.exports
     @constructInfos()
 
   constructInfos: ->
-    @infos.projects = new ProjectsInfo this, @json
-    @infos.contact = new ContactInfo this, @json
+    @projects = new ProjectsInfo this, @json
+    @contact = new ContactInfo this, @json
