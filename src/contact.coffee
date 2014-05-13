@@ -8,9 +8,11 @@ class GitHub extends Generic
     super
     @account = @data.github
 
+  # Get URL of GitHub account.
   home: ->
     "#{ROOT}/#{@account}"
 
+  # Get URL of the specified GitHub project.
   project: (name) ->
     "#{@home()}/#{name}"
 
