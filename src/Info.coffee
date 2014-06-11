@@ -27,3 +27,5 @@ class module.exports
   constructInfos: ->
     @projects = new ProjectsInfo this, @json
     @contact = new ContactInfo this, @json
+
+    @projects.secondaryLoad()

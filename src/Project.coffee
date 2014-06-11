@@ -3,19 +3,43 @@ class module.exports
     # The display name of the project.
     @name = @data.name
 
-    # Short description of the project (one-two lines).
-    @desc = @data.desc
-
-    # URL for the report of the project.
-    @report = @data.report
-
     # General purpose codename for the project (usually derived from the name).
     @code = @data.code
 
-    # GitHub project name. If equal to 'Yes' or projectSettings.githubDefaultOn
-    # is true then it will be set to @code.
-    @github =
-      if @data.github is 'Yes' or @projects.data.projectSettings.githubDefaultOn
-        @code
-      else
-        @data.github
+    # Short description of the project (one-two lines).
+    @desc = @data.desc
+
+    @linkList = []
+    @linkMap = {}
+    @loadLinks @data.links if @data.links
+
+  loadLinks: (links) ->
+    for data in links
+      @loadLink data
+    return
+
+  loadLink: (data) ->
+    link =
+      if data.blog
+        type: 'blog'
+        url: data.blog
+      else if data.github
+        type: 'github'
+        url: data.github
+      else if data.report
+        type: 'report'
+        url: data.report
+      else if data.youtube
+        type: 'youtube'
+        url: data.youtube
+    if link
+      @linkList.push link
+      @linkMap[link.type] = link
+
+  secondaryLoad: ->
+    if @projects.data.projectSettings.githubDefaultOn and not @data.githubOff
+      @loadLink github: @code
+
+    githubContact = @projects.info.contact.contact.github
+    if githubContact and @linkMap.github
+      @linkMap.github.url = githubContact.project @linkMap.github.url
