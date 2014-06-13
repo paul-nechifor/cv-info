@@ -40,6 +40,6 @@ class module.exports
     if @projects.data.projectSettings.githubDefaultOn and not @data.githubOff
       @loadLink github: @code
 
-    githubContact = @projects.info.contact.contact.github
+    githubContact = @projects.info.contact.map.github
     if githubContact and @linkMap.github
       @linkMap.github.url = githubContact.project @linkMap.github.url

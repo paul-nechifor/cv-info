@@ -7,3 +7,4 @@ class module.exports
   secondaryLoad: ->
     for project in @list
       project.secondaryLoad()
+    return
