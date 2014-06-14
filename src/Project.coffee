@@ -4,7 +4,7 @@ class module.exports
     @name = @data.name
 
     # General purpose codename for the project (usually derived from the name).
-    @code = @data.code
+    @code = if @data.code then @data.code else @codifyName @data.name
 
     # Short description of the project (one-two lines).
     @desc = @data.desc
@@ -22,6 +22,9 @@ class module.exports
     githubContact = @projects.info.contact.map.github
     if githubContact and @links.map.github
       @links.map.github.url = githubContact.project @links.map.github.url
+
+  codifyName: (name) ->
+    name.toLowerCase().replace /\s/g, '-'
 
 class LinkSet
   TYPES =
