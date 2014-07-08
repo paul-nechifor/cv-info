@@ -22,9 +22,9 @@ class Generic
 class homepage extends Generic
   constructor: ->
     super
-    @domain = @data.domain
+    [@urlData, @name] = getUrlAndName @data
 
-  url: -> @data.url
+  url: -> @urlData
   description: -> 'homepage'
 
 class email extends Generic
@@ -107,7 +107,7 @@ class twitter extends Generic
 class blog extends Generic
   constructor: ->
     super
-    @urlData = @data
+    [@urlData, @name] = getUrlAndName @data
 
   url: -> @urlData
   description: -> 'blog'
@@ -123,3 +123,11 @@ class stackoverflow extends Generic
 
 CONTACT_LIST = [homepage, email, github, linkedin, facebook, skype, instagram,
     youtube, twitter, blog, stackoverflow]
+
+getUrlAndName = (ref) ->
+  if ref.indexOf('http://') is 0
+    [ref, ref.substring 'http://'.length]
+  else if ref.indexOf('https://') is 0
+    [ref, ref.substring 'https://'.length]
+  else
+    ['http://' + ref, ref]
