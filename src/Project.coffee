@@ -12,6 +12,9 @@ class module.exports
     @links = new LinkSet
     @links.load @data.links if @data.links
 
+    @tags = @loadSetAndList @data.tags
+    @uses = @loadSetAndList @data.uses
+
   url: ->
     @links.primaryUrl()
 
@@ -25,6 +28,24 @@ class module.exports
 
   codifyName: (name) ->
     name.toLowerCase().replace /\s/g, '-'
+
+  loadSetAndList: (from) ->
+    array = null
+    set = {}
+    list = []
+
+    if from instanceof Array
+      array = from
+    else if typeof from is 'string'
+      array = from.split /\W*,\W*/
+
+    if array?
+      for tag in array
+        if tag.length > 0
+          set[tag] = true
+          list.push tag
+
+    {set: set, list: list}
 
 class LinkSet
   TYPES =
