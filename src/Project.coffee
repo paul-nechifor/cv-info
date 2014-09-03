@@ -33,6 +33,7 @@ class LinkSet
     report: 'report'
     youtube: 'YouTube video'
     project: 'project location'
+    article: 'project description'
 
   constructor: () ->
     @map = {}
