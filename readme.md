@@ -1,6 +1,6 @@
 # CV Info
 
-Generate CV data from a YAML file. Not complete.
+Generate CV data from a YAML file.
 
 ![package cover](screenshot.png)
 

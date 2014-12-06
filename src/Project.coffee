@@ -49,7 +49,6 @@ module.exports = class Project
         priorities[parts[0]] = Number parts[1]
       set[parts[0]] = true
       list.push parts[0]
-    console.log set, priorities
 
     ret
 
