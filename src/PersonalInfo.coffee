@@ -39,15 +39,16 @@ class Education
 
 class Location
   constructor: (@data) ->
-    loc = @data.location
-    @normal = loc.city.full + ', ' + loc.country.full
+    loc = @data.location or {}
+    @normal = loc.normal
 
 class Description
   constructor: (@data) ->
-    @short = marked @data.description.short
-    @long = marked @data.description.long
+    desc = @data.description or {}
+    @short = if desc.short then marked desc.short else ''
+    @long = if desc.long then marked desc.long else ''
 
 class InterestSet
   constructor: (@data) ->
-    @list = @data.interests
+    @list = @data.interests or []
     @shortList = @list.map (i) -> i.name

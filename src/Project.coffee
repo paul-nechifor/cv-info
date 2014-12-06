@@ -1,4 +1,4 @@
-class module.exports
+module.exports = class Project
   constructor: (@projects, @data) ->
     # The display name of the project.
     @name = @data.name
@@ -33,19 +33,25 @@ class module.exports
     array = null
     set = {}
     list = []
+    priorities = {}
+    ret = {set: set, list: list, priorities: priorities}
 
     if from instanceof Array
       array = from
     else if typeof from is 'string'
-      array = from.split /\W*,\W*/
+      array = from.trim().split /\s*,\s*/
 
-    if array?
-      for tag in array
-        if tag.length > 0
-          set[tag] = true
-          list.push tag
+    return ret unless array
 
-    {set: set, list: list}
+    for tag in array
+      parts = tag.split '--'
+      if parts.length > 1
+        priorities[parts[0]] = Number parts[1]
+      set[parts[0]] = true
+      list.push parts[0]
+    console.log set, priorities
+
+    ret
 
 class LinkSet
   TYPES =
