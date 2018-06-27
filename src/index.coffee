@@ -1,1 +1,0 @@
-exports.Info = require './Info'
